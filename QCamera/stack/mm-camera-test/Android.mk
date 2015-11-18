@@ -10,6 +10,7 @@ LOCAL_CFLAGS:= \
         $(USE_SERVER_TREE)
 
 LOCAL_CFLAGS += -include $(TARGET_OUT_INTERMEDIATES)/include/mm-camera/camera_defs_i.h
+LOCAL_CFLAGS += -include $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include/linux/msm_ion.h
 
 ifeq ($(strip $(TARGET_USES_ION)),true)
 LOCAL_CFLAGS += -DUSE_ION
@@ -37,6 +38,10 @@ LOCAL_C_INCLUDES+= \
         $(LOCAL_PATH)/../mm-jpeg-interface/inc \
         $(LOCAL_PATH)/../common \
         $(LOCAL_PATH)/../../../ \
+
+LOCAL_C_INCLUDES+= $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include/media
+LOCAL_C_INCLUDES+= $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include
+LOCAL_ADDITIONAL_DEPENDENCIES := $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr
 
 ifeq ($(TARGET_BOARD_PLATFORM),msm8960)
 LOCAL_CFLAGS += -DCAMERA_ION_HEAP_ID=ION_CP_MM_HEAP_ID
